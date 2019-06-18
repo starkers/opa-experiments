@@ -9,10 +9,21 @@ services:
       - 8181:8181
     command:
       - "run"
-#     - "--ignore=.*"
       - "--server"
-      - "/data/"
-      - "--log-level=debug"
+      - "--config-file=/config.yaml"
+      - "--log-level=info"
     volumes:
-      - ./data:/data
+      - ./config.yaml:/config.yaml
 
+    depends_on:
+      - caddy
+
+  caddy:
+    build:
+      context: caddy
+    volumes:
+      - ./bundles:/app
+    ports:
+      - 8080:8080
+    environment:
+      JWT_SECRET: 'qwertyuiopasdfghjklzxcvbnm123456'

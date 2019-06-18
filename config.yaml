@@ -1,0 +1,16 @@
+---
+services:
+  - name: acmecorp
+    url: http://caddy:8080/service/v1
+    credentials:
+      bearer:
+        # JWT notes in the Caddy subdirectory
+        token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NjA4OTg1NDYsImV4cCI6MTkwNzk2NzI5MCwiYXVkIjoiY2FkZHkiLCJzdWIiOiJvcGFAZXhhbXBsZS5jb20iLCJSb2xlIjoiYWdlbnQifQ.3zs5BLwLPZO83bru8LGze-ZijHLRkfwm0v3ERHa6vdg"
+
+bundle:
+  name: authz/bundle.tar.gz
+  prefix: somedir
+  service: acmecorp
+  polling:
+      min_delay_seconds: 10
+      max_delay_seconds: 20
