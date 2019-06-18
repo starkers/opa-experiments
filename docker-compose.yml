@@ -11,8 +11,8 @@ services:
       - "run"
 #     - "--ignore=.*"
       - "--server"
-      - "/data/data.json"
-      - "--log-level=info"
+      - "/data/"
+      - "--log-level=debug"
     volumes:
       - ./data:/data
 
