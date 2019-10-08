@@ -28,9 +28,9 @@ ENV JWT_SECRET qwertyuiopasdfghjklzxcvbnm123456
 WORKDIR /app
 
 # Grab the Caddy binary
-COPY --from=buildstage /build/caddy .
+COPY --from=buildstage /build/caddy /caddy
 
 # Install the config file
-ADD Caddyfile .
+ADD Caddyfile /
 
-ENTRYPOINT /app/caddy -conf /app/Caddyfile
+ENTRYPOINT /caddy -conf /Caddyfile
