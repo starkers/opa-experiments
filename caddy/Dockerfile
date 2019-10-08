@@ -6,8 +6,13 @@ RUN apk add --no-cache \
       git \
       musl-dev
 
-COPY build.sh /build.sh
-RUN /build.sh
+WORKDIR /build
+
+COPY . .
+
+ENV GO111MODULE=on
+RUN go build -v .
+RUN ls -lash
 
 
 ################################
@@ -23,10 +28,9 @@ ENV JWT_SECRET qwertyuiopasdfghjklzxcvbnm123456
 WORKDIR /app
 
 # Grab the Caddy binary
-COPY --from=buildstage /build/caddy /
+COPY --from=buildstage /build/caddy .
 
 # Install the config file
-ADD Caddyfile /
+ADD Caddyfile .
 
-
-ENTRYPOINT /caddy -conf /Caddyfile
+ENTRYPOINT /app/caddy -conf /app/Caddyfile
